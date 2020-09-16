@@ -44,3 +44,38 @@ plt.xlabel("Year Sold")
 plt.ylabel("Sale price")
 plt.title("Year sold VS Sale price")
 # %%
+for feature in temporal_features:
+    if feature != "YrSold":
+        data = dataset.copy()
+        data[feature] = data["YrSold"]-data[feature]
+        plt.scatter(data[feature], data["SalePrice"])
+        plt.xlabel(feature)
+        plt.ylabel("Sale Price")
+        plt.show()
+# %%
+# discrete features
+discrete_features = [feature for feature in numerical_features if len(
+    dataset[feature].unique()) < 25 and feature not in temporal_features]
+print(discrete_features)
+# %%
+for feature in discrete_features:
+    data = dataset.copy()
+    data.groupby(feature)["SalePrice"].median().plot.bar()
+    plt.xlabel(feature)
+    plt.ylabel("Sale Price")
+    plt.title(feature)
+    plt.show()
+# %%
+# continuous features
+continuous_features = [
+    feature for feature in numerical_features if feature not in discrete_features+temporal_features]
+print(continuous_features)
+# %%
+for feature in continuous_features:
+    data = dataset.copy()
+    data[feature].hist(bins=25)
+    plt.xlabel(feature)
+    plt.ylabel("count")
+    plt.title(feature)
+    plt.show()
+# %%
