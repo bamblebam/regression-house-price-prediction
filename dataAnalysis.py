@@ -79,3 +79,57 @@ for feature in continuous_features:
     plt.title(feature)
     plt.show()
 # %%
+# logarithmic transformation
+for feature in continuous_features:
+    data = dataset.copy()
+    if 0 in data[feature].unique():
+        pass
+    else:
+        data[feature] = np.log(data[feature])
+        data['SalePrice'] = np.log(data['SalePrice'])
+        plt.scatter(data[feature], data['SalePrice'])
+        plt.xlabel(feature)
+        plt.ylabel("Sale Price")
+        plt.title(feature)
+        plt.show()
+# %%
+for feature in continuous_features:
+    data = dataset.copy()
+    if 0 in data[feature].unique():
+        pass
+    else:
+        data[feature] = np.log(data[feature])
+        data[feature].hist(bins=25)
+        plt.xlabel(feature)
+        plt.ylabel("count")
+        plt.title(feature)
+        plt.show()
+
+# %%
+# outlier
+for feature in continuous_features:
+    data = dataset.copy()
+    if 0 in data[feature].unique():
+        pass
+    else:
+        data[feature] = np.log(data[feature])
+        data.boxplot(column=feature)
+        plt.ylabel(feature)
+        plt.title(feature)
+        plt.show()
+# %%
+# categorical features
+categorical_features = [
+    feature for feature in dataset.columns if dataset[feature].dtypes == 'O']
+print(categorical_features)
+# %%
+dataset[categorical_features].head()
+# %%
+for feature in categorical_features:
+    data = dataset.copy()
+    data.groupby(feature)["SalePrice"].median().plot.bar()
+    plt.xlabel(feature)
+    plt.ylabel("Sale Price")
+    plt.title(feature)
+    plt.show()
+# %%
