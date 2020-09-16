@@ -133,3 +133,6 @@ for feature in categorical_features:
     plt.title(feature)
     plt.show()
 # %%
+dataset.boxplot(column='LotFrontage')
+plt.show()
+# %%
