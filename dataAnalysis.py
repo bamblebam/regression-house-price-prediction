@@ -29,3 +29,18 @@ dataset = dataset.drop(['MiscFeature', 'PoolQC', 'Id'], axis=1)
 # %%
 dataset
 # %%
+# numerical features
+numerical_features = [
+    feature for feature in dataset.columns if dataset[feature].dtypes != 'O']
+dataset[numerical_features].head()
+# %%
+# temporal features
+temporal_features = [
+    feature for feature in numerical_features if "Yr" in feature or "Year" in feature]
+dataset[temporal_features].head()
+# %%
+dataset.groupby('YrSold')['SalePrice'].median().plot()
+plt.xlabel("Year Sold")
+plt.ylabel("Sale price")
+plt.title("Year sold VS Sale price")
+# %%
