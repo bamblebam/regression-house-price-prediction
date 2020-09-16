@@ -36,3 +36,5 @@ dataset['Electrical'] = dataset['Electrical'].fillna(
 dataset['GarageYrBlt'] = dataset['GarageYrBlt'].fillna(dataset['YearBuilt'])
 # %%
 dataset.head(10)
+
+# %%
