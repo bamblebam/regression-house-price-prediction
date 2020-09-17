@@ -56,3 +56,12 @@ dataset['Functional'] = dataset['Functional'].fillna(
 dataset['SaleType'] = dataset['SaleType'].fillna(
     dataset['SaleType'].mode()[0])
 # %%
+# replacing categorical features with dummy variables
+categorical_features = ['MSZoning', 'Street', 'Alley', 'LotShape', 'LandContour', 'Utilities', 'LotConfig', 'LandSlope', 'Neighborhood', 'Condition1', 'Condition2', 'BldgType', 'HouseStyle', 'RoofStyle', 'RoofMatl', 'Exterior1st', 'Exterior2nd', 'MasVnrType', 'ExterQual', 'ExterCond', 'Foundation',
+                        'BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 'Heating', 'HeatingQC', 'CentralAir', 'Electrical', 'KitchenQual', 'Functional', 'FireplaceQu', 'GarageType', 'GarageFinish', 'GarageQual', 'GarageCond', 'PavedDrive', 'PoolQC', 'Fence', 'MiscFeature', 'SaleType', 'SaleCondition']
+# %%
+# %%
+dataset2 = dataset.copy()
+
+# %%
+dataset2.to_csv('dataset/updatedtest.csv', index=False)
