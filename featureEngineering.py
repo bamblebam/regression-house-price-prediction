@@ -36,11 +36,26 @@ categorical_features = ['MSZoning', 'Street', 'Alley', 'LotShape', 'LandContour'
                         'BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 'Heating', 'HeatingQC', 'CentralAir', 'Electrical', 'KitchenQual', 'Functional', 'FireplaceQu', 'GarageType', 'GarageFinish', 'GarageQual', 'GarageCond', 'PavedDrive', 'PoolQC', 'Fence', 'MiscFeature', 'SaleType', 'SaleCondition']
 
 # %%
-dataset2 = dataset.copy()
+main_dataset = dataset.copy()
+test_data = pd.read_csv('dataset/updatedtest.csv')
+# %%
+final_data = pd.concat([main_dataset, test_data])
+print(final_data.shape)
+# %%
+dataset2 = final_data.copy()
 # %%
 for feature in categorical_features:
-    temp_df = pd.get_dummies(dataset[feature], prefix=feature, drop_first=True)
+    temp_df = pd.get_dummies(
+        final_data[feature], prefix=feature, drop_first=True)
     dataset2.drop([feature], axis=1, inplace=True)
     dataset2 = pd.concat([dataset2, temp_df], axis=1)
 
+# %%
+print(dataset.shape)
+# %%
+df_train = dataset2.iloc[:1460]
+df_test = dataset2.iloc[1460:]
+# %%
+df_test.to_csv('dataset/dummytest.csv')
+df_train.to_csv('dataset/dummytrain.csv')
 # %%
