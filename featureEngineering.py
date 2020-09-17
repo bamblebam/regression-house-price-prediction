@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 pd.pandas.set_option('display.max_columns', None)
 # %%
 dataset = pd.read_csv('dataset/train.csv')
-print(dataset.shape)
 # %%
 # features with na value
 features_with_na = ['LotFrontage', 'Alley', 'MasVnrType', 'MasVnrArea', 'BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2',
@@ -22,10 +21,6 @@ features_with_na3 = ['LotFrontage', 'MasVnrType', 'MasVnrArea',
 for feature in features_with_na2:
     dataset[feature] = dataset[feature].fillna("None")
 
-
-# %%
-dataset.head()
-
 # %%
 dataset['LotFrontage'] = dataset['LotFrontage'].fillna(
     np.round(dataset['LotFrontage'].mean()))
@@ -34,7 +29,5 @@ dataset['MasVnrArea'] = dataset['MasVnrArea'].fillna(0)
 dataset['Electrical'] = dataset['Electrical'].fillna(
     dataset['Electrical'].mode()[0])
 dataset['GarageYrBlt'] = dataset['GarageYrBlt'].fillna(dataset['YearBuilt'])
-# %%
-dataset.head(10)
 
 # %%
