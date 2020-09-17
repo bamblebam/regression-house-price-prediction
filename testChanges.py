@@ -37,9 +37,17 @@ dataset['Utilities'] = dataset['Utilities'].fillna(
 dataset['Exterior1st'] = dataset['Exterior1st'].fillna(
     dataset['Exterior1st'].mode()[0])
 dataset['Exterior2nd'] = dataset['Exterior2nd'].fillna(dataset['Exterior1st'])
+dataset['BsmtFinSF1'] = dataset['BsmtFinSF1'].fillna(0)
+dataset['BsmtFinSF2'] = dataset['BsmtFinSF2'].fillna(0)
+dataset['BsmtUnfSF'] = dataset['BsmtUnfSF'].fillna(0)
+dataset['TotalBsmtSF'] = dataset['TotalBsmtSF'].fillna(0)
 
 # %%
-
+dataset.loc[dataset['TotalBsmtSF'] == 0, 'BsmtFullBath'] = 0
+dataset.loc[dataset['TotalBsmtSF'] == 0, 'BsmtHalfBath'] = 0
 # %%
-print([feature for feature in dataset.columns if dataset[feature].isnull().sum() >= 1])
+features_with_na = [
+    features for features in dataset.columns if dataset[features].isnull().sum() >= 1]
+for feature in features_with_na:
+    print(feature, np.round(dataset[feature].isnull().mean()*100, 4), "%")
 # %%
