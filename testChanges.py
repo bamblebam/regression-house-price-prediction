@@ -45,9 +45,14 @@ dataset['TotalBsmtSF'] = dataset['TotalBsmtSF'].fillna(0)
 # %%
 dataset.loc[dataset['TotalBsmtSF'] == 0, 'BsmtFullBath'] = 0
 dataset.loc[dataset['TotalBsmtSF'] == 0, 'BsmtHalfBath'] = 0
+
 # %%
-features_with_na = [
-    features for features in dataset.columns if dataset[features].isnull().sum() >= 1]
-for feature in features_with_na:
-    print(feature, np.round(dataset[feature].isnull().mean()*100, 4), "%")
+dataset['GarageCars'] = dataset['GarageCars'].fillna(0)
+dataset['GarageArea'] = dataset['GarageArea'].fillna(0)
+dataset['KitchenQual'] = dataset['KitchenQual'].fillna(
+    dataset['KitchenQual'].mode()[0])
+dataset['Functional'] = dataset['Functional'].fillna(
+    dataset['Functional'].mode()[0])
+dataset['SaleType'] = dataset['SaleType'].fillna(
+    dataset['SaleType'].mode()[0])
 # %%
