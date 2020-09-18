@@ -55,6 +55,15 @@ print(dataset.shape)
 # %%
 df_train = dataset2.iloc[:1460]
 df_test = dataset2.iloc[1460:]
+
+# %%
+df_test.drop(['Id', 'SalePrice'], axis=1, inplace=True)
+df_train.drop(['Id'], axis=1, inplace=True)
+# %%
+df_test.reset_index(drop=True, inplace=True)
+df_train.reset_index(drop=True, inplace=True)
+# %%
+df_test.head()
 # %%
 df_test.to_csv('dataset/dummytest.csv')
 df_train.to_csv('dataset/dummytrain.csv')
