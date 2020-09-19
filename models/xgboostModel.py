@@ -17,6 +17,16 @@ y_train = dataset['SalePrice']
 classifier = xgboost.XGBRegressor()
 classifier.fit(X_train, y_train)
 # %%
-filename = 'xgboost_model.pkl'
+filename = '../compiled_models/xgboost_model.pkl'
 pickle.dump(classifier, open(filename, 'wb'))
+# %%
+submission_df = dataset = pd.read_csv('../dataset/sample_submission.csv')
+df_test = pd.read_csv('../dataset/dummytest.csv')
+# %%
+y_pred = classifier.predict(df_test)
+# %%
+pred = pd.DataFrame(y_pred)
+sample = pd.concat([submission_df['Id'], pred], axis=1)
+sample.columns = ['Id', 'SalePrice']
+sample.to_csv('../submissions/sample_submission.csv', index=False)
 # %%
