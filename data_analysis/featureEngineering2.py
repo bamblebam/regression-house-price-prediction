@@ -30,3 +30,5 @@ dataset2.drop(['Unnamed: 0'], inplace=True, axis=1)
 # %%
 dataset2.head()
 # %%
+dataset2.to_csv('../dataset/scaled_train_1.csv', index=False)
+# %%
