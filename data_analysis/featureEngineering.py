@@ -1,3 +1,6 @@
+# basic feature engineering
+# changed na values and made dummies
+
 # %%
 import numpy as np
 import pandas as pd

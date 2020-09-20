@@ -1,3 +1,4 @@
+# same procedure as featureEngineering.py but for train data
 # %%
 import numpy as np
 import pandas as pd

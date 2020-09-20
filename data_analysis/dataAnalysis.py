@@ -1,10 +1,10 @@
+# data analysis and plots
 # %%
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 pd.pandas.set_option('display.max_columns', None)
-%matplotlib inline
 # %%
 dataset = pd.read_csv('dataset/train.csv')
 print(dataset.shape)

@@ -1,3 +1,4 @@
+# min max scaling and normalization for dataset from featureEnginnering.py
 # %%
 import numpy as np
 import pandas as pd
