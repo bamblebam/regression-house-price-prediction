@@ -8,7 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 pd.pandas.set_option('display.max_columns', None)
 # %%
-dataset = pd.read_csv('dataset/train.csv')
+dataset = pd.read_csv('../dataset/train.csv')
 # %%
 # features with na value
 features_with_na = ['LotFrontage', 'Alley', 'MasVnrType', 'MasVnrArea', 'BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2',
@@ -32,7 +32,8 @@ dataset['MasVnrArea'] = dataset['MasVnrArea'].fillna(0)
 dataset['Electrical'] = dataset['Electrical'].fillna(
     dataset['Electrical'].mode()[0])
 dataset['GarageYrBlt'] = dataset['GarageYrBlt'].fillna(dataset['YearBuilt'])
-
+# %%
+dataset.to_csv('../dataset/na_train.csv', index=False)
 # %%
 # replacing categorical features with dummy variables
 categorical_features = ['MSZoning', 'Street', 'Alley', 'LotShape', 'LandContour', 'Utilities', 'LotConfig', 'LandSlope', 'Neighborhood', 'Condition1', 'Condition2', 'BldgType', 'HouseStyle', 'RoofStyle', 'RoofMatl', 'Exterior1st', 'Exterior2nd', 'MasVnrType', 'ExterQual', 'ExterCond', 'Foundation',
