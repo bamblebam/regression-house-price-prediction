@@ -1,4 +1,4 @@
-# min max scaling and normalization for dataset from featureEnginnering.py
+# min max scaling and normalization for dataset from featureEnginnering.py without sp
 # %%
 import numpy as np
 import pandas as pd

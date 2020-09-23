@@ -1,4 +1,4 @@
-# xgboost model for featureEnginnering.py dataset
+# xgboost model for featureEnginnering_ordinal.py dataset
 # %%
 import numpy as np
 import pandas as pd
