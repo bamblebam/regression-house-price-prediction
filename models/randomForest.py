@@ -13,6 +13,7 @@ from sklearn.metrics import mean_squared_log_error
 from hyperopt.pyll.base import scope
 from hyperopt import tpe, hp, fmin, Trials, STATUS_OK
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV
 pd.pandas.set_option('display.max_columns', None)
 
 # %%
@@ -56,20 +57,35 @@ best = fmin(
 )
 print("Best: {}".format(best))
 
-
+# %%
+parameter_grid = {
+    'bootstrap': [True],
+    'max_depth': [80, 90, 100, 110],
+    'max_features': [2, 3],
+    'min_samples_leaf': [3, 4, 5],
+    'min_samples_split': [8, 10, 12],
+    'n_estimators': [100, 200, 300, 1000]
+}
+# %%
+estimator = RandomForestRegressor()
+grid_search = GridSearchCV(
+    estimator=estimator, param_grid=parameter_grid, n_jobs=-1, cv=3, verbose=2)
+# %%
+grid_search.fit(X_train, y_train)
+print(grid_search.best_params_)
 # %%
 regressor = RandomForestRegressor(
-    max_depth=77, max_features=4, n_estimators=500, criterion='mse')
+    max_depth=110, max_features=3, n_estimators=200, criterion='mse', min_samples_leaf=3, min_samples_split=8)
 regressor.fit(X_train, y_train)
 y_pred = regressor.predict(df_test)
 print(y_pred)
 
 # %%
-filename = '../compiled_models/random_forest3.pkl'
+filename = '../compiled_models/random_forest4.pkl'
 pickle.dump(regressor, open(filename, 'wb'))
 # %%
 pred = pd.DataFrame(y_pred)
 sample = pd.concat([submission_df['Id'], pred], axis=1)
 sample.columns = ['Id', 'SalePrice']
-sample.to_csv('../submissions/sample_submission8.csv', index=False)
+sample.to_csv('../submissions/sample_submission9.csv', index=False)
 # %%
