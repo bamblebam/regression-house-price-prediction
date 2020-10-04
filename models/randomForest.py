@@ -23,7 +23,7 @@ parameter_space = {
     'n_estimators': hp.choice('n_estimators', [100, 200, 300, 400, 500, 600, 700]),
     'max_depth': hp.randint('max_depth', 70, 100),
     'max_features': hp.randint('max_features', 2, 5),
-    'criterion': hp.choice('criteraion', ['mse', 'mae']),
+    'criterion': hp.choice('criterion', ['mse', 'mae']),
 }
 
 # %%
@@ -46,4 +46,23 @@ best = fmin(
     trials=trials
 )
 print("Best: {}".format(best))
+
+# %%
+submission_df = dataset = pd.read_csv('../dataset/sample_submission.csv')
+df_test = pd.read_csv('../dataset/dummytest.csv')
+# %%
+regressor = RandomForestRegressor(
+    max_depth=91, max_features=4, n_estimators=200, criterion='mse')
+regressor.fit(X_train, y_train)
+y_pred = regressor.predict(df_test)
+print(y_pred)
+
+# %%
+filename = '../compiled_models/random_forest1.pkl'
+pickle.dump(regressor, open(filename, 'wb'))
+# %%
+pred = pd.DataFrame(y_pred)
+sample = pd.concat([submission_df['Id'], pred], axis=1)
+sample.columns = ['Id', 'SalePrice']
+sample.to_csv('../submissions/sample_submission6.csv', index=False)
 # %%
